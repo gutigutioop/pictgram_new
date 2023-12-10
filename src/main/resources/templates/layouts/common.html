@@ -15,7 +15,7 @@
       </button>  
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-			<th:block sec:authorize="isAuthenticated()">
+			<th:block sec:authorize="isAuthenticated()"><!--認証がtrueなら-->
             <li class="nav-item">
                	<a class="nav-link" th:href="@{/favorites}">
                 <img src="/images/icons/heart.png" 
@@ -35,7 +35,7 @@
                  </a>
             </li>
             </th:block>
-            <th:block sec:authorize="!isAuthenticated()">
+            <th:block sec:authorize="!isAuthenticated()"><!--認証がfalseなら-->
             <li class="nav-item">
 				<a class="nav-link" th:href="@{/users/new}">
                 <img src="/images/icons/register.png" th:src="@{/images/icons/register.png}">
