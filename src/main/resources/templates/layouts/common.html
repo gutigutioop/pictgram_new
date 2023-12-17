@@ -37,6 +37,11 @@
             </th:block>
             <th:block sec:authorize="!isAuthenticated()"><!--認証がfalseなら-->
             <li class="nav-item">
+               <a class="nav-link" th:href="@{/calendars}">
+               <img src="/images/icons/calendar.png" th:src="@{/images/icons/calendar.png}">
+               </a>
+            </li>
+            <li class="nav-item">
 				<a class="nav-link" th:href="@{/users/new}">
                 <img src="/images/icons/register.png" th:src="@{/images/icons/register.png}">
                  </a>

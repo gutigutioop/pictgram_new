@@ -31,6 +31,8 @@ public class CommentsController {
     private CommentRepository repository;
 
     @RequestMapping(value = "/topics/{topicId}/comments/new")
+    //local ブラウザに言語設定ある。位置の事。どの言語か持ってるブラウザの言語に設定される。URLの中に入ってるtopics/○○/comments
+    //の番号を@PathVariableを使ってロング型のtopicid変数にいれる。文字列なのでlongにいれる。
     public String newComment(@PathVariable("topicId") long topicId, Model model) {
         CommentForm form = new CommentForm();
         form.setTopicId(topicId);
@@ -46,9 +48,14 @@ public class CommentsController {
             model.addAttribute("hasMessage", true);
             model.addAttribute("class", "alert-danger");
             model.addAttribute("message", messageSource.getMessage("comments.create.flash.1", new String[] {}, locale));
+            //<form class="new_comment" id="new_comment" th:action="@{/topics/__${form.topicId}__/comment}" th:object="${form}"> comments.html参照
+            //th:action="@{/topics/__${form.topicId}__/comment}のtopicIdが４２行目に入る。
+            //layout.htmlの<div th:if="${hasMessage}" class="alert alert-dismissible fade show" th:classappend="${class}" role='alert'>
+            //trueなら・・・の処理が入る。コメントに誤りがあったらバリデーションエラーが発生。"class"は決まってる言語。コメント書き直せって元の画面に伝える。alert-dangerで赤文字入る。
             return "comments/new";
+            
         }
-
+            //mapper map(地図）同じ名のデータをエンティティに詰め込む。リクエストも？画面から飛んできたformクラス→コントローラー
         Comment entity = modelMapper.map(form, Comment.class);
         entity.setTopicId(topicId);
         repository.saveAndFlush(entity);
@@ -59,6 +66,7 @@ public class CommentsController {
                 messageSource.getMessage("comments.create.flash.2", new String[] {}, locale));
 
         return "redirect:/topics";
+        //TopicsControllerのindexメソッドを呼ぶ。新しいページ作るのめんどいからtopicsに任せる。@GetMapping(path = "/topics")のindexメソッドを呼ぶ。
     }
 
 }

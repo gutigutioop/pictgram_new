@@ -47,7 +47,7 @@ public class User extends AbstractEntity implements UserDetails, UserInf {
     private Long userId;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String username;//メール
 
     @Column(nullable = false)
     private String name;
