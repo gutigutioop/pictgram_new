@@ -25,6 +25,16 @@ spring:
           auth: true
           starttls:
             enable: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${google.client.id}
+            client-secret: ${google.client.secret}
+          github:
+            clientId: ${github.client.id}
+            clientSecret: ${github.client.secret}
 image:
   local: true
 
